@@ -1,13 +1,4 @@
-
-
-(function () {
-	"use strict"
-	angular.module("chemistry")
-		.factory("elements", elementsFactory);
-		
-	function elementsFactory() {
-		
-		return {			
+{
     "H": {
         "symbol": "H",
         "name": "Hydrogen",
@@ -1070,7 +1061,4 @@
         "meltingPoint": "258",
         "boilingPoint": "263"
     }
-
-		};
-	}
-})();
+}
