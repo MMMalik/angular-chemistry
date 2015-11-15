@@ -1094,6 +1094,14 @@
 				}
 			});
 			
+			comparableStrings.forEach(function (property) {
+				predefined[property] = function (element, options) {					
+					if (typeof options.match !== "undefined") {						
+						return !!element[property].match(options.match);
+					}
+				}
+			});
+			
 			criteria = (arguments.length === 1) ? criteria: predefined[criteria];
 			angular.forEach(elements, function (element, key) {
 				if (criteria(element, options) === true) {

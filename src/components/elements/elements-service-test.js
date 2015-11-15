@@ -1095,6 +1095,17 @@ describe("ElementsService", function () {
 			filtered = Elements.filter(key, { $lt: value.$lt });
 			expect(Object.keys(filtered).length).toBeGreaterThan(0);
 		});
+		
+		var comparableStrings = {
+			"symbol": { match: /H/ },
+			"name": { match: /ium/ },
+			"desc": { match: /metalloid/ }
+		}
+		angular.forEach(comparableStrings, function (value, key) {
+			filtered = Elements.filter(key, value);
+			console.log(filtered);
+			expect(Object.keys(filtered).length).toBeGreaterThan(0);
+		});
 	});
 		
 	it("should process filtering according to the custom criteria", function () {
