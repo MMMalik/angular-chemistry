@@ -1,4 +1,4 @@
-describe("ElementsService", function () {
+describe("Elements", function () {
 	
 	var elements = {
 			"H": {
@@ -1069,8 +1069,8 @@ describe("ElementsService", function () {
 	
 	var Elements;
 	
-	beforeEach(inject(function (_ElementsService_) {
-		Elements = _ElementsService_;
+	beforeEach(inject(function (_Elements_) {
+		Elements = _Elements_;
 	}));
 	
 	it("should contain all elements", function () {
@@ -1103,7 +1103,6 @@ describe("ElementsService", function () {
 		}
 		angular.forEach(comparableStrings, function (value, key) {
 			filtered = Elements.filter(key, value);
-			console.log(filtered);
 			expect(Object.keys(filtered).length).toBeGreaterThan(0);
 		});
 	});

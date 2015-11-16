@@ -16,12 +16,16 @@ module.exports = function(grunt) {
         src: "src/components/<%= pkg.name %>-concat.js",
         dest: "dest/<%= pkg.name %>.min.js"
       }
-    }
+    },
+	clean: {
+		concat: "src/components/angular-chemistry-concat.js"
+	}
   });
   
   grunt.loadNpmTasks("grunt-contrib-uglify");
   grunt.loadNpmTasks("grunt-contrib-concat");
+  grunt.loadNpmTasks("grunt-contrib-clean");
   
-  grunt.registerTask("default", ["concat", "uglify"]);
+  grunt.registerTask("default", ["concat", "uglify", "clean"]);
 
 };
