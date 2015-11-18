@@ -1,4 +1,4 @@
-describe("Elements", function () {
+describe("ChemElements", function () {
 	
 	var elements = {
 			"H": {
@@ -1069,8 +1069,8 @@ describe("Elements", function () {
 	
 	var Elements;
 	
-	beforeEach(inject(function (_Elements_) {
-		Elements = _Elements_;
+	beforeEach(inject(function (_ChemElements_) {
+		Elements = _ChemElements_;
 	}));
 	
 	it("should contain all elements", function () {

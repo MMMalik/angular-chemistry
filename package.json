@@ -22,6 +22,7 @@
   "dependencies": {},
   "devDependencies": {
     "angular": "^1.4.7",
+    "angular-sanitize": "^1.4.7",
     "grunt": "^0.4.5",
     "grunt-contrib-clean": "^0.7.0",
     "grunt-contrib-concat": "^0.5.1",

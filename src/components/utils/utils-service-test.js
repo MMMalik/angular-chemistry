@@ -23,17 +23,30 @@ describe("ChemUtils", function () {
 	});
 	
 	it("should insert <sup> tags appropriately", function () {
-		var formula = "SO4_2-";
+		var formula = "SO4^2-";
 		formula = ChemUtils.parseFormula(formula);
 		expect(formula).toEqual("SO<sub>4</sub><sup>2-</sup>");
-		formula = "Cr2O7_2-";
+		formula = "Cr2O7^2-";
 		formula = ChemUtils.parseFormula(formula);
 		expect(formula).toEqual("Cr<sub>2</sub>O<sub>7</sub><sup>2-</sup>");
-		formula = "BH4_-";
+		formula = "BH4^-";
 		formula = ChemUtils.parseFormula(formula);
 		expect(formula).toEqual("BH<sub>4</sub><sup>-</sup>");
-		formula = "[Zn(NH3)4]_2+";
+		formula = "[Zn(NH3)4]^2+";
 		formula = ChemUtils.parseFormula(formula);
 		expect(formula).toEqual("[Zn(NH<sub>3</sub>)<sub>4</sub>]<sup>2+</sup>");
 	});
+	
+	it("should pass more complicated formulas by using more verbose syntax", function () {		
+		var formula = "W(CO)3(PPr^(i)3)2(&eta;^(2)-H2)";
+		formula = ChemUtils.parseFormula(formula);
+		expect(formula).toEqual("W(CO)<sub>3</sub>(PPr<sup>i</sup><sub>3</sub>)<sub>2</sub>(&eta;<sup>2</sup>-H<sub>2</sub>)");
+		formula = "_(something)W(CO)3(PPr^(i)3)2(&eta;^(2)-H2)";
+		formula = ChemUtils.parseFormula(formula);
+		expect(formula).toEqual("<sub>something</sub>W(CO)<sub>3</sub>(PPr<sup>i</sup><sub>3</sub>)<sub>2</sub>(&eta;<sup>2</sup>-H<sub>2</sub>)");
+		formula = "W_(something)(CO)3(PPr^(i)3)2(&eta;^(2)-H2)";
+		formula = ChemUtils.parseFormula(formula);
+		expect(formula).toEqual("W<sub>something</sub>(CO)<sub>3</sub>(PPr<sup>i</sup><sub>3</sub>)<sub>2</sub>(&eta;<sup>2</sup>-H<sub>2</sub>)");
+	});
+	
 });

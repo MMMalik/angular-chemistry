@@ -14,6 +14,7 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       "assets/angular.js",
+      "assets/angular-sanitize.js",
       "assets/angular-mocks.js",
       "../src/angular-chemistry-app.js",
       "../src/components/**/*.js"

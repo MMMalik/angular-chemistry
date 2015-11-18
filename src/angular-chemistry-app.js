@@ -1,4 +1,4 @@
 (function () {
 	"use strict";
-	angular.module("chemistry", []);
+	angular.module("chemistry", ["ngSanitize"]);
 })();

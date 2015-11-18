@@ -1,9 +1,9 @@
 (function () {
 	"use strict"
 	angular.module("chemistry")
-		.factory("Elements", Elements);
+		.factory("ChemElements", ChemElements);
 		
-	function Elements() {
+	function ChemElements() {
 		
 		var elements = {
 			"H": {
