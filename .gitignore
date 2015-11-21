@@ -3,4 +3,5 @@
 dest
 .npmignore
 gh-pages
+gh-pages-src
 node_modules

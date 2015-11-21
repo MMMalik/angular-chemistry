@@ -4,14 +4,14 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON("package.json"),
 	watch: {
 		ghPages: {
-			files: ["gh-pages/src/app.js", "gh-pages/src/*/*.js", "!gh-pages/src/*/*-test.js", "gh-pages/src/*/*.html", "gh-pages/src/sass/*.sass"],
+			files: ["gh-pages-src/src/app.js", "gh-pages-src/src/*/*.js", "!gh-pages-src/src/*/*-test.js", "gh-pages-src/src/*/*.html", "gh-pages-src/src/sass/*.sass"],
 			tasks: ["copy:ghPages", "concat:ghPages", "uglify:ghPages", "clean:ghPages", "sass:ghPages", "cssmin:ghPages"]
 		}
 	},
 	sass: {
 		ghPages: {
 			files: {
-				"gh-pages/stylesheets/main.css": "gh-pages/src/sass/main.sass"
+				"gh-pages/stylesheets/main.css": "gh-pages-src/src/sass/main.sass"
 			}
 		}
 	},
@@ -25,7 +25,8 @@ module.exports = function(grunt) {
 	copy: {
 		ghPages: {
 			files: [
-				{ expand: true, cwd: "gh-pages/src/", src: "*/*.html", dest: "gh-pages/components/" }
+				{ expand: true, cwd: "gh-pages-src/src/", src: "*/*.html", dest: "gh-pages/components/" },
+				{ expand: true, cwd: "gh-pages-src/", src: "index.html", dest: "gh-pages/" }
 			]
 		}
 	},
@@ -40,11 +41,11 @@ module.exports = function(grunt) {
 		},
 		ghPages: {
 			src: [
-				"gh-pages/src/app.js",
-				"gh-pages/src/*/*.js",				
-				"!gh-pages/src/*/*-test.js"
+				"gh-pages-src/src/app.js",
+				"gh-pages-src/src/*/*.js",				
+				"!gh-pages-src/src/*/*-test.js"
 			],
-			dest: "gh-pages/src/app-concat.js"
+			dest: "gh-pages-src/src/app-concat.js"
 		}
 	},
     uglify: {
@@ -56,13 +57,13 @@ module.exports = function(grunt) {
       },
 	  ghPages: {
 		files: {
-			"gh-pages/javascripts/app.min.js": "gh-pages/src/app-concat.js"
+			"gh-pages/javascripts/app.min.js": "gh-pages-src/src/app-concat.js"
 		}
 	  }
     },
 	clean: {
 		build: ["src/components/angular-chemistry-concat.js"],
-		ghPages: ["gh-pages/src/app-concat.js"]
+		ghPages: ["gh-pages-src/src/app-concat.js", "gh-pages/stylesheets/main.css"]
 	}
   });
   
@@ -74,7 +75,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("grunt-contrib-cssmin");
   grunt.loadNpmTasks("grunt-sass");
   
-  grunt.registerTask("default", ["copy", "concat", "uglify", "clean"]);
+  grunt.registerTask("default", ["sass", "cssmin", "copy", "concat", "uglify", "clean"]);
   grunt.registerTask("watch-gh-pages", ["watch:ghPages"]);
 
 };
