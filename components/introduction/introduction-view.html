@@ -1,0 +1,14 @@
+<div ng-controller="IntroductionController as IntroductionCtrl">
+	<p>
+		Angular Chemistry is a package for AngularJS, that provides you a bunch of chemistry-related tools.
+		Currently, the following functionalities are available:
+	</p>
+	<ul>
+		<li ng-repeat="(key, value) in IntroductionCtrl.toolsDescription">
+			<p>
+				<a ng-href="/#/{{value.api}}" ng-bind="value.title"></a> -
+				<span ng-bind="value.desc"></span>
+			</p>
+		</li>
+	</ul>
+</div>
