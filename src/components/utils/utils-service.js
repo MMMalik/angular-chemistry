@@ -1,6 +1,6 @@
 (function () {
 	"use strict"
-	angular.module("chemistry")
+	angular.module("mmAngularChemistry")
 		.factory("ChemUtils", ChemUtils);
 		
 	function ChemUtils() {

@@ -1,5 +1,5 @@
 describe("ChemUtils", function () {
-	beforeEach(module("chemistry"));
+	beforeEach(module("mmAngularChemistry"));
 	
 	var ChemUtils;
 	

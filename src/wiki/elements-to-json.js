@@ -2,6 +2,7 @@ var fs = require("fs");
 
 var data = fs.readFileSync("elements-wiki-raw.txt", "utf8"),
 	elements = {},
+	elementsLight = {},
 	data = data.split("\n");
 
 function parseElement(element) {
@@ -93,20 +94,34 @@ function parseElement(element) {
 	}
 	
 	return {
-		symbol: getSymbol(),
-		name: getName(),
-		desc: getDesc(),
-		weight: getWeight(),
-		density: getDensity(),
-		meltingPoint: getMeltingPoint(),
-		boilingPoint: getBoilingPoint()
+		fullEntry: {
+			symbol: getSymbol(),
+			name: getName(),
+			desc: getDesc(),
+			weight: getWeight(),
+			density: getDensity(),
+			meltingPoint: getMeltingPoint(),
+			boilingPoint: getBoilingPoint()
+		},
+		light: {
+			symbol: getSymbol(),
+			name: getName(),
+			weight: getWeight(),
+		}
 	};
 }
 data.forEach(function (el, index) {
 	if (index % 2 === 0) {
-		element = parseElement(el);
+		
+		var parsed = parseElement(el);
+		
+		var element = parsed.fullEntry,
+			elementLight = parsed.light;
+			
 		elements[element.symbol] = element;
+		elementsLight[elementLight.symbol] = elementLight;
 	}
 });
 
 fs.writeFileSync("elements.json", JSON.stringify(elements, null, 4), "utf8");
+fs.writeFileSync("elements-light.json", JSON.stringify(elementsLight, null, 4), "utf8");

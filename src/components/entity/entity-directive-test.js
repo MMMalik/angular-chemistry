@@ -1,5 +1,5 @@
 describe("chemEntity tests", function () {	
-	beforeEach(module("chemistry"));
+	beforeEach(module("mmAngularChemistry"));
 	
 	var element, $scope, $compile;
 	
@@ -111,8 +111,8 @@ describe("chemEntity tests", function () {
 	});
 });
 	
-describe("chemEntity within chemScheme tests", function () {	
-	beforeEach(module("chemistry"));
+/*describe("chemEntity within chemScheme tests", function () {	
+	beforeEach(module("mmAngularChemistry"));
 	
 	var element, $scope;
 	
@@ -143,4 +143,4 @@ describe("chemEntity within chemScheme tests", function () {
 		);
 	});
 	
-});
+});*/

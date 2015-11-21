@@ -1,7 +1,9 @@
 (function () {
 	"use strict"
-	angular.module("chemistry")
-		.directive("chemEntity", chemEntity);
+	angular.module("mmAngularChemistry")
+		.directive("chemEntity", chemEntity)
+		.directive("chemSubst", chemEntity)
+		.directive("chemProd", chemEntity)
 		
 	chemEntity.$inject = ["ChemUtils"];
 		
