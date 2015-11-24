@@ -1,5 +1,27 @@
-<div class="col-xs-12">
-	<h2>
-		Angular Chemistry <small>a set of chemistry-related tools for AngularJS</small>
-	</h2>
+<div class="row">
+	<div class="col-md-12">
+		<div ng-controller="TitleController as TitleCtrl">
+			<ul class="list-inline">
+				<li ng-repeat="link in TitleCtrl.linksInner">
+					<a ng-href="#/{{link.toLowerCase()}}" ng-bind="link"></a>
+				</li>
+				<li ng-repeat="(title, link) in TitleCtrl.linksOuter">
+					<a ng-href="{{link}}" ng-bind="title"></a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="row row-no-padding">
+    <div class="col-md-12"><hr/></div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<h2>
+			Angular Chemistry <small>a set of chemistry-related tools for AngularJS</small>
+		</h2>
+	</div>
+</div>
+<div class="row row-no-padding">
+    <div class="col-md-12"><hr/></div>
 </div>

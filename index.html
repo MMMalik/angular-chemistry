@@ -8,23 +8,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="stylesheets/bootstrap.min.css">
         <link rel="stylesheet" href="stylesheets/main.min.css">
-        <base href="/angular-chemistry/">
+        <base href="/">
     </head>
     <body ng-app="angularChemistrySite">
-        <div class="container">
+        <div class="container" ng-controller="MainController as MainCtrl">
+            <div ng-include="'components/title/title-view.html'"></div>
             <div class="row">
-                <div ng-include="'components/title/title-view.html'"></div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12"><hr/></div>
-            </div>
-            <div class="row">
-                <div class="col-md-2 col-xs-3">
-                    <div ng-include="'components/sidebar/sidebar-view.html'"></div>
-                </div>
-                <div class="col-md-10 col-xs-9">
-                    <div ng-view></div>
-                </div>
+                <div ng-view></div>
             </div>
         </div>
         <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.2/angular.min.js"></script>

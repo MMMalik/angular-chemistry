@@ -1,0 +1,51 @@
+<div ng-controller="ChemSchemeController as ChemSchemeCtrl">
+	<h3 class="no-top-margin">
+		<strong>chemScheme</strong>
+	</h3>
+	<h4><mark>Info</mark></h4>
+	<p>
+		The <code>chemScheme</code> directive allows for rendering of chemical reactions.
+		It serves as a wrapper for a set of <code>chemEntity</code>. <code>chemScheme</code> inserts <code>+</code> signs between reagents
+		and an arrow between substrates and products.
+	</p>	
+	<h4><mark>Usage</mark></h4>
+	<p>		
+		This directive creates an isolated scope.
+		It can be used either as an element <code>&lt;chem-scheme&gt;&lt;/chem-scheme&gt;</code>
+		or as an attribute <code>&lt;div chem-scheme&gt;&lt;/div&gt;</code>.
+		It has a default priority 0.
+	</p>
+	<table class="table table-borderless">
+		<thead>
+			<tr>
+				<th>Param</th>
+				<th>Type</th>
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					chemArrow
+				</td>
+				<td>
+					<code>string</code>
+				</td>
+				<td>
+					<p>
+						A string or &lcub;&lcub; expression &rcub;&rcub; to eval.
+						Possible values are:
+						<ul class="list-inline">
+							<li ng-repeat="(arrow, symbol) in ChemSchemeCtrl.arrows">
+								<code ng-bind="arrow"></code> for <span ng-bind-html="symbol"></span>
+								<span ng-if="!$last">,</span>
+								<span ng-if="$last">.</span>
+							</li>
+						</ul>
+					</p>
+				</td>
+			</tr>			
+		</tbody>
+	</table>
+	<h4><mark>Examples</mark></h4>
+</div>
