@@ -8,28 +8,22 @@
 	function chemScheme($compile) {
 		return {
 			restrict: "AE",
-			transclude: true,
-			template: "<div ng-transclude></div>",
+			template: "<span ng-repeat='subst in chemSubst'>" +
+						"<chem-entity chem-formula='{{subst}}'></chem-entity>" +
+						"<span ng-if='!$last'> &plus; </span>" +
+					  "</span>" +
+					  "<span ng-bind-html='arrow'></span>" +
+					  "<span ng-repeat='prod in chemProd'>" +
+						"<chem-entity chem-formula='{{prod}}'></chem-entity>" +
+						"<span ng-if='!$last'> &plus; </span>" +
+					  "</span>",
 			scope: {
-				chemArrow: "@"
+				chemArrow: "@",
+				chemProd: "=",
+				chemSubst: "="
 			},
 			link: function (scope, element) {
-				function appendPluses(els) {
-					angular.forEach(els, function (el, index) {
-						element.append(el);						
-						if (index < els.length - 1) { element.append("<span> &plus; </span>"); }
-					});
-				}
-				
-				var arrow = "&" + scope.chemArrow + ";",
-					substrates = element.find("chem-subst"),
-					products = element.find("chem-prod");
-					
-				element.empty();				
-				
-				appendPluses(substrates);
-				element.append("<span> " + arrow + " </span>");
-				appendPluses(products);				
+				scope.arrow = " &" + scope.chemArrow + "; ";
 			}
 		};
 	}
