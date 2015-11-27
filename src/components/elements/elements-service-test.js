@@ -1119,7 +1119,7 @@ describe("ChemElements", function () {
 		
 		var comparableStrings = {
 			"symbol": { match: /H/ },
-			"name": { match: /ium/ },
+			"name": { match: new RegExp("ium") },
 			"desc": { match: /metalloid/ }
 		}
 		angular.forEach(comparableStrings, function (value, key) {
@@ -1134,5 +1134,36 @@ describe("ChemElements", function () {
 		}
 		var filtered = Elements.filter(criteria);
 		expect(Object.keys(filtered).length).toBeGreaterThan(0);
+	});
+	
+	it("should calculate the molecular weight", function () {
+		var formulas = {
+			f1: { formula: "H2SO4", weight: 98 },
+			f2: { formula: "NaOH", weight: 40 },
+			f3: { formula: "C12H22O11", weight: 342 },
+			f4: { formula: "Re2O7", weight: 484 },
+			f5: { formula: "H_(2)SO_(4)", weight: 98 },
+			f6: { formula: "H_(2)^+SO_(4)^2-", weight: 98 },
+			f7: { formula: "H^+_(2)SO^2-_(4)", weight: 98 },
+			f8: { formula: "C43H72Cl2P2Ru", weight: 823 },
+			f9: { formula: "CH3COOH", weight: 60 }
+		};
+		angular.forEach(formulas, function (f, val) {
+			expect(Math.floor(Elements.calcWeight(f.formula).result + 0.5)).toEqual(f.weight);
+		});
+	});
+	
+	it("should return 'unknown' if invalid formula was given", function () {
+		var formulas = {
+			f1: { formula: "GH2SO4", un: ["G"] },
+			f2: { formula: "AffNaOH", un: ["Aff"] },
+			f3: { formula: "GH2SO4ff", un: ["G", "ff"] },
+			f4: { formula: "AffNa_(oo)OH", un: ["Aff", "oo"] },
+			f5: { formula: "HSO4^2-", un: [] },
+			f6: { formula: "H3_(4f)PO4Plk", un: ["4f", "Plk"] }
+		};
+		angular.forEach(formulas, function (f, val) {
+			expect(Elements.calcWeight(f.formula).unknown).toEqual(f.un);
+		});
 	});
 });

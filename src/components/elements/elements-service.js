@@ -673,6 +673,44 @@
 			}, function (err) {});			
 		}
 		
+		/*
+		 * Calculates molecular weight of the given formula.
+		 * @api public
+		 *
+		 */
+		service.calcWeight = function (formula) {
+			var match = formula.match(/\d+|\_\(.*?\)|\^\(.*?\)|\^\d*[\-\+]|[A-Za-z][a-z]*/g),
+				errMessage = { unknown: [] }, result = 0,
+				content, element, mass, lastEl;
+			match.forEach(function (el) {				
+				element = elements[el];
+				if (typeof element !== "undefined") {
+					mass = element.weight;
+					result += mass * 1;
+				} else if (isFinite(el)) {
+					if (typeof mass === "undefined") {
+						errMessage.unknown.push(lastEl);
+					}
+					result -= mass;
+					result += mass * el;
+				} else if (el.substr(0, 2) === "_(") {
+					content = el.substr(2, el.length - 3);
+					if (typeof mass === "undefined") {
+						errMessage.unknown.push(lastEl);
+					}
+					if (!isFinite(content)) {
+						errMessage.unknown.push(content);
+					}
+					result -= mass;
+					result += mass * content;
+				} else if (el.substr(0, 2) !== "_^" && el.substr(0, 1) !== "^") {
+					errMessage.unknown.push(el);
+				}
+				lastEl = element;
+			});			
+			return { result: result, unknown: errMessage.unknown };
+		}
+		
 		return service;
 	}
 })();

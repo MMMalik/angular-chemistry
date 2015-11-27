@@ -7,7 +7,7 @@
 		var service = {};
 		
 		service.parseFormula = function (formula, options) {
-			var match = formula.match(/\d+|\_\(.*?\)|\^\(.*?\)|\^\d*[\-\+]|[^\_\^\d]+/g),			
+			var match = formula.match(/\d+|\_\(.*?\)+|\^\(.*?\)+|\^\d*[\-\+]|[^\_\^\d]+/g),			
 				result = "";
 			match.forEach(function (el) {				
 				if (el.substr(0, 2) === "^(") {

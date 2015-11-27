@@ -49,4 +49,9 @@ describe("ChemUtils", function () {
 		expect(formula).toEqual("W<sub>something</sub>(CO)<sub>3</sub>(PPr<sup>i</sup><sub>3</sub>)<sub>2</sub>(&eta;<sup>2</sup>-H<sub>2</sub>)");
 	});
 	
+	it("should handle multiple ')' in '_()'", function () {
+		var formula = "_(something))W(CO)3(PPr^(i)3)2(&eta;^(2)-H2)";
+		formula = ChemUtils.parseFormula(formula);
+		expect(formula).toEqual("<sub>something)</sub>W(CO)<sub>3</sub>(PPr<sup>i</sup><sub>3</sub>)<sub>2</sub>(&eta;<sup>2</sup>-H<sub>2</sub>)");
+	})
 });
