@@ -1,14 +1,16 @@
-<div class="col-xs-2" ng-controller="ApiController as ApiCtrl">
-	<p><a ng-href="#/api">overview</a></p>
-	<div ng-repeat="(name, elements) in ApiCtrl.navbar">
-		<strong>{{name}}</strong>
-		<ul class="list-unstyled">
-			<li ng-repeat="element in elements">
-				<a ng-href="#/api/{{element.toLowerCase()}}">{{element}}</a>
-			</li>
-		</ul>
-	</div>
+<div class="col-xs-3 col-md-2" ng-controller="ApiController as ApiCtrl">
+	<mm-scroll>
+		<p><a ng-href="#/api">overview</a></p>
+		<div ng-repeat="(name, elements) in ApiCtrl.navbar">
+			<strong>{{name}}</strong>
+			<ul class="list-unstyled">
+				<li ng-repeat="element in elements">
+					<a ng-href="#/api/{{element.toLowerCase()}}">{{element}}</a>
+				</li>
+			</ul>
+		</div>
+	</mm-scroll>
 </div>
-<div class="col-xs-10">
+<div class="col-xs-9 col-md-10">
 	<div ng-include="MainCtrl.getTemplate()"></div>
 </div>

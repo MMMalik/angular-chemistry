@@ -11,8 +11,9 @@
 	<h4><mark>Usage</mark></h4>
 	<p>		
 		This directive creates an isolated scope.
-		It can be used either as an element <code>&lt;chem-entity&gt;&lt;/chem-entity&gt;</code>
-		or as an attribute <code>&lt;div chem-entity&gt;&lt;/div&gt;</code>.
+		It can be used either as an element or as an attribute:
+		<pre>&lt;chem-entity ... &gt;&lt;/chem-entity&gt;
+&lt;ANY chem-entity ... &gt;&lt;/ANY&gt;</pre>		
 		It has a default priority 0.
 	</p>
 	<table class="table table-borderless">
@@ -33,7 +34,7 @@
 				</td>
 				<td>
 					<p>
-						A string or &lcub;&lcub; expression &rcub;&rcub; to eval.
+						A string or <code>{{</code> expression <code>}}</code> to eval. A one-way binding.
 						The formula can be given using simplified syntax, e.g. <code>H2SO4</code> or <code>Fe2(PO4)3</code>.
 						The parser places a number inside <code>&lt;sub&gt;&lt;/sub&gt;</code> tags if it
 						is preceeded by a letter or a bracket (<code>)</code>, <code>]</code>, or <code>}</code>).
@@ -68,7 +69,7 @@
 				</td>
 				<td>
 					<p>
-						A string or &lcub;&lcub; expression &rcub;&rcub; to eval.
+						A string or <code>{{</code> expression <code>}}</code> to eval. A one-way binding.
 						Will be passed to <code>class</code> attribute in each <code>&lt;sub&gt;</code> tag in the formula.
 						Must be a defined css class, e.g. <code>&lt;style&gt; .red{ color: red; } &lt;/style&gt;</code> (example below).
 					</p>
@@ -83,7 +84,7 @@
 				</td>
 				<td>
 					<p>
-						A string or &lcub;&lcub; expression &rcub;&rcub; to eval.
+						A string or <code>{{</code> expression <code>}}</code> to eval. A one-way binding.
 						Will be passed to <code>class</code> attribute in each <code>&lt;sup&gt;</code> tag in the formula.
 						Works analogously to <code>chemSub</code> (example below).
 					</p>
@@ -98,7 +99,7 @@
 				</td>
 				<td>
 					<p>
-						A string or &lcub;&lcub; expression &rcub;&rcub; to eval.
+						A string or <code>{{</code> expression <code>}}</code> to eval. A one-way binding.
 						If set to "true", the formula will not be parsed (example below).
 				</td>
 			</tr>
@@ -108,7 +109,7 @@
 	<table class="table table-borderless">
 		<thead>
 			<tr>
-				<th>Output</th>
+				<th>Result</th>
 				<th>Code</th>
 			</tr>
 		</thead>
@@ -143,6 +144,22 @@
 				</td>
 				<td>
 					<code>&lt;chem-entity chem-as-is="true" chem-formula="<span ng-bind="example"></span>"&gt;&lt;/chem-entity&gt;</code>	
+				</td>					
+			</tr>
+			<tr ng-repeat="example in ChemEntityCtrl.examples.examplesStrong">
+				<td>
+					<strong chem-entity chem-formula="{{example}}"></strong>
+				</td>
+				<td>
+					<code>&lt;strong chem-entity chem-formula="<span ng-bind="example"></span>"&gt;&lt;/strong&gt;</code>
+				</td>					
+			</tr>
+			<tr ng-repeat="example in ChemEntityCtrl.examples.examplesEm">
+				<td>
+					<em chem-entity chem-formula="{{example}}"></em>
+				</td>
+				<td>
+					<code>&lt;em chem-entity chem-formula="<span ng-bind="example"></span>"&gt;&lt;/em&gt;</code>
 				</td>					
 			</tr>
 		</tbody>
