@@ -1,7 +1,9 @@
 ## angular-chemistry
 
-Install
+Install:
+
 `npm i angular-chemistry`
+
 `bower install angular-chemistry`
 
 This project aims for creating a set of chemistry-related tools for AngularJS.
