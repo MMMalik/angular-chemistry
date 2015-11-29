@@ -13,8 +13,8 @@
 					</div>
 				</mm-scroll>
 			</div>
-			<div class="col-xs-9 col-md-10">
-				<div ng-include="MainCtrl.getTemplate()"></div>
+			<div class="col-xs-9 col-md-10" ng-if="ApiCtrl.apiLocation()">				
+				<div ng-include="ApiCtrl.getTemplate()"></div>
 			</div>
 		</div>
 		<div ng-switch-when="false">
@@ -28,8 +28,8 @@
 					</ul>
 				</div>
 			</div>
-			<div class="col-xs-12">
-				<div ng-include="MainCtrl.getTemplate()"></div>
+			<div class="col-xs-12" ng-if="ApiCtrl.apiLocation()">
+				<div ng-include="ApiCtrl.getTemplate()"></div>
 			</div>
 		</div>		
 	</div

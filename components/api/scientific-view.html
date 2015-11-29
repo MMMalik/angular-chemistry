@@ -1,0 +1,120 @@
+<div ng-controller="ScientificFilterController as SciCtrl">	
+	<h3 class="no-top-margin">
+		<strong>scientificFilter</strong>
+	</h3>
+	<h4><mark>Info</mark></h4>
+	<p>
+		A filter which applies the scientific notation to a number.
+	</p>	
+	<h4><mark>Usage</mark></h4>
+	
+	<table class="table table-borderless">
+		<thead>
+			<tr>
+				<th>Param</th>
+				<th>Type</th>
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					value
+				</td>
+				<td>
+					<code>number|string</code>
+				</td>
+				<td>
+					An input value. It can be either a <code>number</code> or a <code>string</code> (parsed <code>number</code>).
+					If it represents an invalid number, the input value will be returned unchanged.
+					Moreover, the leading zero in fractions can be omitted, e.g. <code>.34</code>, <code>.0022</code>, and <code>".987"</code> are considered as valid inputs.
+				</td>
+			</tr>
+			<tr>
+				<td>
+					precision
+				</td>
+				<td>
+					<code>number</code>
+				</td>
+				<td>
+					<p>
+						The input value will be displayed with the specified precision.
+						By default, no rounding is performed. The max value for this param is 10.
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					symbol
+				</td>
+				<td>
+					<code>string</code>
+				</td>
+				<td>
+					<p>
+						The symbol between the significand and the exponent. The possible values are:
+						<code>"dot"</code> for <code>&centerdot;</code> and <code>"cross"</code> for <code>&Cross;</code>.
+						Default value is <code>"dot"</code>;
+					</p>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<h4><mark>Examples</mark></h4>
+	<form class="form-inline">
+		Try it:
+		<div class="form-group">
+			<input type="text" ng-model="SciCtrl.tryIt" class="form-control" placeholder="Number">
+		</div>
+		<div class="form-group">
+			<input type="text" ng-model="SciCtrl.decimal" class="form-control" placeholder="Decimal places">
+		</div>
+		Result: <span ng-bind-html="SciCtrl.result()"></span>
+	</form>	
+	<table class="table table-borderless">
+		<thead>
+			<tr>
+				<th>Plain</th>
+				<th>Result</th>
+				<th>Code</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="number in SciCtrl.numbers">
+				<td>
+					<span ng-bind="number"></span>
+				</td>
+				<td>					
+					<span ng-bind-html="(number | scientific)"></span>
+				</td>
+				<td>
+					<code>&lt;span ng-bind-html="(number | scientific)"&gt;&lt;/span&gt;</code>
+				</td>				
+			</tr>
+			<tr ng-repeat="number in SciCtrl.numbers">
+				<td>
+					<span ng-bind="number"></span>
+				</td>
+				<td>					
+					<span ng-bind-html="(number | scientific:2:'cross')"></span>
+				</td>
+				<td>
+					<code>&lt;span ng-bind-html="(number | scientific:2:'cross')"&gt;&lt;/span&gt;</code>
+				</td>
+			</tr>
+			<tr ng-repeat="number in SciCtrl.numbers">
+				<td>
+					<span ng-bind="number"></span>
+				</td>
+				<td>					
+					<span ng-bind-html="(number | scientific:'cross')"></span>
+				</td>
+				<td>
+					<code>&lt;span ng-bind-html="(number | scientific:'cross')"&gt;&lt;/span&gt;</code>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+</div>

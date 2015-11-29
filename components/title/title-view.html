@@ -1,15 +1,10 @@
 <div class="row">
 	<div class="col-md-12">
-		<div ng-controller="TitleController as TitleCtrl">
-			<ul class="list-inline">
-				<li ng-repeat="link in TitleCtrl.linksInner">
-					<a ng-href="#/{{link.toLowerCase()}}" ng-bind="link"></a>
-				</li>
-				<li ng-repeat="(title, link) in TitleCtrl.linksOuter">
-					<a ng-href="{{link}}" ng-bind="title"></a>
-				</li>
-			</ul>
-		</div>
+		<ul class="list-inline">
+			<li><a href="#/">Home</a></li>
+			<li><a href="#/api">Api Docs</a></li>
+			<li><a href="https://github.com/MMMalik/angular-chemistry">Github</a></li>
+		</ul>
 	</div>
 </div>
 <div class="row row-no-padding">
