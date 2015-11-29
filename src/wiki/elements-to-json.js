@@ -98,15 +98,15 @@ function parseElement(element) {
 			symbol: getSymbol(),
 			name: getName(),
 			desc: getDesc(),
-			weight: getWeight(),
-			density: getDensity(),
-			meltingPoint: getMeltingPoint(),
-			boilingPoint: getBoilingPoint()
+			weight: parseFloat(getWeight()),
+			density: parseFloat(getDensity()),
+			meltingPoint: parseFloat(getMeltingPoint()),
+			boilingPoint: parseFloat(getBoilingPoint())
 		},
 		light: {
 			symbol: getSymbol(),
 			name: getName(),
-			weight: getWeight(),
+			weight: parseFloat(getWeight()),
 		}
 	};
 }
