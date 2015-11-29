@@ -97,6 +97,16 @@ Elements.filter("symbol", { match: /H/ });</pre>
 	<h4><mark>Examples</mark></h4>
 	<div ng-controller="ElementsController as ElemCtrl">
 		<div ng-repeat="(name, value) in ElemCtrl.examples">
+			<p class="mm-examples">
+				<strong>
+					Example #<span ng-bind="$index + 1"></span>
+					<span ng-switch="name">
+						<span ng-switch-when="ex1">- calculating molecular weights</span>
+						<span ng-switch-when="ex2">- filtering on built-in properties</span>
+						<span ng-switch-when="ex3">- filtering on extended properties</span>
+					</span>
+				</strong>
+			</p>
 			<ul class="nav nav-tabs" role="tablist">				
 				<li ng-class="value.active === 'index' ? 'active' : '';"><a ng-click="ElemCtrl.changeTab(value, 'index')" role="button">index.html</a></li>
 				<li ng-class="value.active === 'script' ? 'active' : '';"><a ng-click="ElemCtrl.changeTab(value, 'script')" role="button">script.js</a></li>
@@ -113,10 +123,61 @@ Elements.filter("symbol", { match: /H/ });</pre>
 						<pre ng-bind="value.script"></pre>
 					</p>
 				</div>
-				<div class="tab-pane active" ng-show="value.active === 'result'">
-					<div class="mm-examples-results">
-						<div ng-repeat="(formula, weight) in value.weights">
-							<chem-entity chem-formula="{{formula}}"></chem-entity>, molecular weight: <span ng-bind="weight.result.toFixed(2)"></span>
+				<div ng-switch="name">
+					<div ng-switch-when="ex1" class="tab-pane active" ng-show="value.active === 'result'">
+						<div class="mm-examples-results">
+							<div ng-repeat="(formula, weight) in value.weights">
+								<chem-entity chem-formula="{{formula}}"></chem-entity>
+								, molecular weight: <span ng-bind="weight.result.toFixed(2)"></span>
+							</div>
+						</div>
+					</div>
+					<div ng-switch-when="ex2" class="tab-pane active" ng-show="value.active === 'result'">
+						<div class="mm-examples-results">
+							<div class="row">
+								<div class="col-xs-4">
+									<ins>Elements with names, which start with "L" and end with "ium":</ins>
+									<div ng-repeat="(element, value) in value.elementsWithIum">
+										<span ng-bind="value.name"></span>, symbol: <strong ng-bind="value.symbol"></strong>
+									</div>
+								</div>
+								<div class="col-xs-4">
+									<ins>Elements with three-letterd symbols:</ins>
+									<div ng-repeat="(element, value) in value.elementsWithThreeLett"> 
+										<span ng-bind="value.name"></span>, symbol: <strong ng-bind="value.symbol"></strong>
+									</div>
+								</div>
+								<div class="col-xs-4">
+									<ins>Elements with molecular weight greater than 10 amu but lower than 20 amu:</ins>
+									<div ng-repeat="(element, value) in value.elementsWithWeight"> 
+										<span ng-bind="value.name"></span>, weight: <strong ng-bind="value.weight.toFixed(2)"></strong>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div ng-switch-when="ex3" class="tab-pane active" ng-show="value.active === 'result'">
+						<div class="mm-examples-results">
+							<div class="row">
+								<div class="col-xs-4">
+									<ins>Elements with boiling points lower than 50K:</ins>
+									<div ng-repeat="(element, value) in value.elementsWithBp">
+										<span ng-bind="value.name"></span>, symbol: <strong ng-bind="value.symbol"></strong>
+									</div>
+								</div>
+								<div class="col-xs-4">
+									<ins>Noble gases:</ins>
+									<div ng-repeat="(element, value) in value.nobleGases"> 
+										<span ng-bind="value.name"></span>, symbol: <strong ng-bind="value.symbol"></strong>
+									</div>
+								</div>
+								<div class="col-xs-4">
+									<ins>Polyatomic nonmetals:</ins>
+									<div ng-repeat="(element, value) in value.polyatomicNonmetals"> 
+										<span ng-bind="value.name"></span>, symbol: <strong ng-bind="value.symbol"></strong>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
