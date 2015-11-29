@@ -1,5 +1,9 @@
 ## angular-chemistry
 
+Install
+`npm i angular-chemistry`
+`bower install angular-chemistry`
+
 This project aims for creating a set of chemistry-related tools for AngularJS.
 It requires [**ngSanitize**](https://docs.angularjs.org/api/ngSanitize) module to work.
 Currently available are:
@@ -7,7 +11,7 @@ Currently available are:
 + `chemEntity` and `chemScheme` directives for parsing and rendering chemical formulas
 + `scientific` filter for applying the scientific notation to a number
    
-coming soon:
+coming in the next version:
 + `Pubchem` service and directives for interacting with [Pubchem](https://pubchem.ncbi.nlm.nih.gov/) database.
 + more filters and utils
 

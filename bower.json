@@ -1,0 +1,23 @@
+{
+  "name": "angular-chemistry",
+  "version": "1.0.1",
+  "authors": [
+    "Michał Malik <michalmmalik@gmail.com>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MMMalik/angular-chemistry.git"
+  },
+  "description": "A set of chemistry related tools for AngularJS",
+  "main": "./dest/angular-chemistry.js",
+  "license": "MIT",
+  "homepage": "http://mmmalik.github.io/angular-chemistry/#/",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",    
+    "tests",
+    "gh-pages",
+    "gh-pages-src"
+  ]
+}
