@@ -4,6 +4,8 @@ Install:
 
 `npm i angular-chemistry`
 
+`bower install angular-chemistry`
+
 This project aims for creating a set of chemistry-related tools for AngularJS.
 
 The module is registered as `mmAngularChemistry`. It has [**ngSanitize**](https://docs.angularjs.org/api/ngSanitize) module as a dependency.
