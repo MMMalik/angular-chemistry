@@ -25,7 +25,7 @@
 					<code>number|string</code>
 				</td>
 				<td>
-					An input value. It can be either a <code>number</code> or a <code>string</code> (parsed <code>number</code>).
+					An input value. It can be either a <code>number</code> or a <code>string</code> (it will be parsed internally to <code>number</code>).
 					If it represents an invalid number, the input value will be returned unchanged.
 					Moreover, the leading zero in fractions can be omitted, e.g. <code>.34</code>, <code>.0022</code>, and <code>".987"</code> are considered as valid inputs.
 				</td>
@@ -39,8 +39,8 @@
 				</td>
 				<td>
 					<p>
-						The input value will be displayed with the specified precision.
-						By default, no rounding is performed. The max value for this param is 10.
+						An optional parameter. The input value will be displayed with the specified precision.
+						By default, no rounding is performed. The max value for this param is <code>10</code>.
 					</p>
 				</td>
 			</tr>
@@ -53,7 +53,7 @@
 				</td>
 				<td>
 					<p>
-						The symbol between the significand and the exponent. The possible values are:
+						An optional parameter. The symbol between the significand and the exponent. The possible values are:
 						<code>"dot"</code> for <code>&centerdot;</code> and <code>"cross"</code> for <code>&Cross;</code>.
 						Default value is <code>"dot"</code>;
 					</p>
