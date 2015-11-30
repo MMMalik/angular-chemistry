@@ -16,6 +16,7 @@ Currently available are:
 + `Elements` service, which is a built-in periodic table of elements along with some utils
 + `chemEntity` and `chemScheme` directives for parsing and rendering chemical formulas
 + `scientific` filter for applying the scientific notation to a number
++ `temp` filter for displaying temperature values and converting them to Fahrenheits, Celsius, and Kelvins.
    
 coming in the next version:
 + `Pubchem` service and directives for interacting with [Pubchem](https://pubchem.ncbi.nlm.nih.gov/) database.

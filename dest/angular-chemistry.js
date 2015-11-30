@@ -770,17 +770,24 @@
 			//converts number to string
 			var value = typeof val === "string" ? val: val + "",				
 				len = value.length,
-				first, rest, result, strAsFloat, power, dotPosition;
-				
+				first, rest, result, strAsFloat, power, dotPosition, negative;
+			
+			if (value.match(/^[\-0\.]+$/) || !isFinite(value) || value.length === 0) {
+				// if value is any combination of dots and zeroes, return the value
+				// if value is not a finite number, return the value
+				// if value is empty string
+				return value;
+			}
+			if (value.charAt(0) === "-") {
+				// if '-' sign is present, set the flag
+				negative = true;
+				// strip it
+				value = value.substr(1);
+			}
 			if (arguments.length === 2) {
 				// if the second argument is string, then it is assumed to be symbol, not prec
 				symbol = typeof prec === "string" ? prec: symbol;
-			}
-			if (value.match(/^[0\.]+$/) || !isFinite(value)) {
-				// if value is any combination of dots and zeroes, return the value
-				// if value is not a finite number, return the value
-				return value;
-			}
+			}			
 			if (prec > 10) {
 				// sets upper cap for precision
 				prec = 10;
@@ -797,8 +804,13 @@
 			}			
 				
 			function applyPrec(first, rest) {
+				// applies the supplied precision (decimal places)
 				strAsFloat = parseFloat(first + "." + rest);
-				return result = typeof prec === "number" ? strAsFloat.toFixed(prec) + "": strAsFloat + ""; 
+				if (negative) {
+					return typeof prec === "number" ? "-" + strAsFloat.toFixed(prec): "-" + strAsFloat;
+				} else {
+					return typeof prec === "number" ? "" + strAsFloat.toFixed(prec): "" + strAsFloat;
+				}				
 			}
 				
 			function lesserThanOne() {
@@ -812,7 +824,7 @@
 				return applyPrec(first, rest);
 			}
 			
-			function greaterThanOne() {
+			function greaterThanTen() {
 				if (dotPosition < 0) {
 					first = value.charAt(0);
 					rest = value.substr(1);
@@ -831,31 +843,117 @@
 			dotPosition = value.indexOf(".");
 			
 			if (dotPosition === 1) {
+				// for numbers like 0.001 or 1.234
 				if (value.charAt(0) > 0) {
+					// if the leading digit is greater than 0
 					return applyPrec(value.charAt(0), value.substr(2));
-				}
+				} 
+				// if the leading digit is 0, i.e. number is lesser than 1
 				result = lesserThanOne();
 			} else if (dotPosition === 0) {
+				// for the notation with the leading dot, like .234 or .009
 				result = lesserThanOne();
 			} else {
 				if (value.length === 1) {
+					// if there is no dot and the value is a single digit
 					return applyPrec(value);
-				} else if (value === "") {
-					return "";
 				}
-				result = greaterThanOne();
+				// otherwise, the value is greater than 10
+				result = greaterThanTen();
 			}
 			
 			if (typeof symbol === "string") {
-				if (symbol.match(/^cross$/i)) {					
-					return result + " &Cross; 10<sup>" + power + "</sup>";
+				if (symbol.match(/^cross$/i)) {			
+					result = result + " &Cross; 10<sup>" + power + "</sup>";
+				} else if (symbol.match(/^dot$/i)) {					
+					result = result + " &centerdot; 10<sup>" + power + "</sup>";
 				}
-				if (symbol.match(/^dot$/i)) {					
-					return result + " &centerdot; 10<sup>" + power + "</sup>";
-				}
+			} else {
+				result = result + " &centerdot; 10<sup>" + power + "</sup>";
+			}
+			return result;
+		}
+		
+		return filter;			
+	}
+})();
+(function () {
+	"use strict";
+	angular.module("mmAngularChemistry")
+		.filter("temp", Temperature);
+		
+	function Temperature() {
+		
+		// converts celcius to kelvins
+		function celcToKelv(val) { return val + 273.15; }
+		
+		// converts kelvins to celsius
+		function kelvToCelc(val) { return val - 273.15; }
+		
+		// converts fahrenheits to celsius
+		function fahrToCelc(val) { return 5 * (val - 32) / 9; }
+		
+		// converts celsius to fahrenheits
+		function celcToFahr(val) { return (9 * val / 5) + 32; }
+		
+		// converts kelvins to fahrenheit
+		function kelvToFahr(val) { return celcToFahr(kelvToCelc(val)); }
+		
+		// converts fahrenheits to kelvins
+		function fahrToKelv(val) { return celcToKelv(fahrToCelc(val)); }
+		
+		/*
+		 * Calculates temperature and appends the specified unit.
+		 * @api public
+		 * @param val - number, input
+		 * @param unit - string, desired unit
+		 * @param prec - number, number of decimal places		 
+		 *
+		 */		
+		function filter(val, unit, prec) {
+			
+			// normalizes val to be number
+			// +val converts string to number, e.g. '123' to 123, but '123aa' to 'NaN' (in opposition to parseFloat)
+			var value = typeof val === "number" ? val: +val,
+				deg = " &deg;",
+				result;
+			
+			// if 'NaN' or '' is passed, then return input value
+			if (!isFinite(value) || val === "") {
 				return val;
-			} 
-			return result + " &centerdot; 10<sup>" + power + "</sup>";
+			}
+			
+			// if second param is number, it is assumed to be prec not unit
+			prec = typeof unit === "number" ? unit: prec;
+			
+			// if prec is undefined, assign default value 1
+			prec = typeof prec === "undefined" ? 1: prec;
+			
+			// set maximum for decimal places
+			if (prec > 10) {
+				prec = 10;
+			}
+			
+			if (unit === "C-to-K") {
+				result = celcToKelv(value).toFixed(prec) + " K";
+			} else if (unit === "K-to-C") {
+				result = kelvToCelc(value).toFixed(prec) + deg + "C";
+			} else if (unit === "F-to-C") {
+				result = fahrToCelc(value).toFixed(prec) + deg + "C";
+			} else if (unit === "C-to-F") {
+				result = celcToFahr(value).toFixed(prec) + deg + "F";
+			} else if (unit === "K-to-F") {
+				result = kelvToFahr(value).toFixed(prec) + deg + "F";
+			} else if (unit === "F-to-K") {
+				result = fahrToKelv(value).toFixed(prec) + " K";
+			} else if (unit === "C") {
+				result = value.toFixed(prec) + deg + "C";
+			} else if (unit === "F") {
+				result = value.toFixed(prec) + deg + "F";
+			} else {
+				result = value.toFixed(prec) + " K";
+			}			
+			return result;
 		}
 		
 		return filter;			
