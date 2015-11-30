@@ -8,7 +8,7 @@ This project aims for creating a set of chemistry-related tools for AngularJS.
 
 The module is registered as `mmAngularChemistry`. It has [**ngSanitize**](https://docs.angularjs.org/api/ngSanitize) module as a dependency.
 
-`angular.module('myModule', \['mmAngularChemistry'\]);`
+`angular.module('myModule', ['mmAngularChemistry']);`
 
 Currently available are:
 + `Elements` service, which is a built-in periodic table of elements along with some utils
