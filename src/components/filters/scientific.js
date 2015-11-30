@@ -17,17 +17,24 @@
 			//converts number to string
 			var value = typeof val === "string" ? val: val + "",				
 				len = value.length,
-				first, rest, result, strAsFloat, power, dotPosition;
-				
+				first, rest, result, strAsFloat, power, dotPosition, negative;
+			
+			if (value.match(/^[\-0\.]+$/) || !isFinite(value) || value.length === 0) {
+				// if value is any combination of dots and zeroes, return the value
+				// if value is not a finite number, return the value
+				// if value is empty string
+				return value;
+			}
+			if (value.charAt(0) === "-") {
+				// if '-' sign is present, set the flag
+				negative = true;
+				// strip it
+				value = value.substr(1);
+			}
 			if (arguments.length === 2) {
 				// if the second argument is string, then it is assumed to be symbol, not prec
 				symbol = typeof prec === "string" ? prec: symbol;
-			}
-			if (value.match(/^[0\.]+$/) || !isFinite(value)) {
-				// if value is any combination of dots and zeroes, return the value
-				// if value is not a finite number, return the value
-				return value;
-			}
+			}			
 			if (prec > 10) {
 				// sets upper cap for precision
 				prec = 10;
@@ -44,8 +51,13 @@
 			}			
 				
 			function applyPrec(first, rest) {
+				// applies the supplied precision (decimal places)
 				strAsFloat = parseFloat(first + "." + rest);
-				return result = typeof prec === "number" ? strAsFloat.toFixed(prec) + "": strAsFloat + ""; 
+				if (negative) {
+					return typeof prec === "number" ? "-" + strAsFloat.toFixed(prec): "-" + strAsFloat;
+				} else {
+					return typeof prec === "number" ? "" + strAsFloat.toFixed(prec): "" + strAsFloat;
+				}				
 			}
 				
 			function lesserThanOne() {
@@ -59,7 +71,7 @@
 				return applyPrec(first, rest);
 			}
 			
-			function greaterThanOne() {
+			function greaterThanTen() {
 				if (dotPosition < 0) {
 					first = value.charAt(0);
 					rest = value.substr(1);
@@ -78,31 +90,35 @@
 			dotPosition = value.indexOf(".");
 			
 			if (dotPosition === 1) {
+				// for numbers like 0.001 or 1.234
 				if (value.charAt(0) > 0) {
+					// if the leading digit is greater than 0
 					return applyPrec(value.charAt(0), value.substr(2));
-				}
+				} 
+				// if the leading digit is 0, i.e. number is lesser than 1
 				result = lesserThanOne();
 			} else if (dotPosition === 0) {
+				// for the notation with the leading dot, like .234 or .009
 				result = lesserThanOne();
 			} else {
 				if (value.length === 1) {
+					// if there is no dot and the value is a single digit
 					return applyPrec(value);
-				} else if (value === "") {
-					return "";
 				}
-				result = greaterThanOne();
+				// otherwise, the value is greater than 10
+				result = greaterThanTen();
 			}
 			
 			if (typeof symbol === "string") {
-				if (symbol.match(/^cross$/i)) {					
-					return result + " &Cross; 10<sup>" + power + "</sup>";
+				if (symbol.match(/^cross$/i)) {			
+					result = result + " &Cross; 10<sup>" + power + "</sup>";
+				} else if (symbol.match(/^dot$/i)) {					
+					result = result + " &centerdot; 10<sup>" + power + "</sup>";
 				}
-				if (symbol.match(/^dot$/i)) {					
-					return result + " &centerdot; 10<sup>" + power + "</sup>";
-				}
-				return val;
-			} 
-			return result + " &centerdot; 10<sup>" + power + "</sup>";
+			} else {
+				result = result + " &centerdot; 10<sup>" + power + "</sup>";
+			}
+			return result;
 		}
 		
 		return filter;			

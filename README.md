@@ -4,10 +4,12 @@ Install:
 
 `npm i angular-chemistry`
 
-`bower install angular-chemistry`
-
 This project aims for creating a set of chemistry-related tools for AngularJS.
-It requires [**ngSanitize**](https://docs.angularjs.org/api/ngSanitize) module to work.
+
+The module is registered as `mmAngularChemistry`. It has [**ngSanitize**](https://docs.angularjs.org/api/ngSanitize) module as a dependency.
+
+`angular.module('myModule', \['mmAngularChemistry'\]);`
+
 Currently available are:
 + `Elements` service, which is a built-in periodic table of elements along with some utils
 + `chemEntity` and `chemScheme` directives for parsing and rendering chemical formulas

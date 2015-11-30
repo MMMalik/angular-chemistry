@@ -16,6 +16,7 @@ module.exports = function(grunt) {
 		build: {
 			files: [
 				{ expand: true, cwd: "src/components/", src: "angular-chemistry.js", dest: "dest/" },
+				{ expand: true, cwd: "src/wiki/", src: "elements.json", dest: "dest/" },
 			]
 		}
 	},
