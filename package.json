@@ -1,6 +1,6 @@
 {
   "name": "angular-chemistry",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A set of chemistry related tools for AngularJS",
   "main": "./dest/angular-chemistry.js",
   "scripts": {
