@@ -111,7 +111,7 @@
 			
 			if (typeof symbol === "string") {
 				if (symbol.match(/^cross$/i)) {			
-					result = result + " &Cross; 10<sup>" + power + "</sup>";
+					result = result + " &times; 10<sup>" + power + "</sup>";
 				} else if (symbol.match(/^dot$/i)) {					
 					result = result + " &centerdot; 10<sup>" + power + "</sup>";
 				}
