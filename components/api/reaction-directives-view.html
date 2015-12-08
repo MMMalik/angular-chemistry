@@ -1,0 +1,85 @@
+<div ng-controller="ReactionDirController as ReactionDirCtrl">
+	<div ng-repeat="(directiveName, properties) in ReactionDirCtrl.directives">
+		<h3 class="no-top-margin"><strong ng-bind="directiveName"></strong></h3>
+		<h4><mark>Info</mark></h4>
+		<p ng-bind-html="properties.desc"></p>		
+		<h4><mark>Usage</mark></h4>
+		<p ng-bind-html="properties.info"></p>
+		<table ng-show="properties.hasParams()" class="table">
+			<thead>
+				<tr>
+					<th>Param</th>
+					<th>Type</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="(paramName, properties) in properties.params">
+					<td ng-bind="paramName"></td>
+					<td ng-bind-html="properties.type"></td>
+					<td ng-bind-html="properties.details"></td>
+				</tr>
+			</tbody>
+		</table>
+		<h4><mark>Examples</mark></h4>
+		<div ng-switch="directiveName">
+			<table class="table table-borderless">
+				<thead>
+					<tr>
+						<th>Output</th>
+						<th>Code</th>
+					</tr>
+				</thead>
+				<tbody ng-switch-when="chemEntity">
+					<tr ng-repeat="example in properties.examples">
+						<td>
+							<chem-entity chem-formula="{{example}}"></chem-entity>
+						</td>
+						<td>
+							<code>&lt;chem-entity chem-formula="<span ng-bind="example"></span>"&gt;&lt;/chem-entity&gt;</code>	
+						</td>					
+					</tr>
+					<tr ng-repeat="example in properties.examplesSub">
+						<td>
+							<chem-entity chem-sub="red" chem-formula="{{example}}"></chem-entity>
+						</td>
+						<td>
+							<code>&lt;chem-entity chem-sub="red" chem-formula="<span ng-bind="example"></span>"&gt;&lt;/chem-entity&gt;</code>	
+						</td>					
+					</tr>
+					<tr ng-repeat="example in properties.examplesSup">
+						<td>
+							<chem-entity chem-sup="red" chem-formula="{{example}}"></chem-entity>
+						</td>
+						<td>
+							<code>&lt;chem-entity chem-sup="red" chem-formula="<span ng-bind="example"></span>"&gt;&lt;/chem-entity&gt;</code>	
+						</td>					
+					</tr>
+					<tr ng-repeat="example in properties.examplesAsIs">
+						<td>
+							<chem-entity chem-as-is="true" chem-formula="{{example}}"></chem-entity>
+						</td>
+						<td>
+							<code>&lt;chem-entity chem-as-is="true" chem-formula="<span ng-bind="example"></span>"&gt;&lt;/chem-entity&gt;</code>	
+						</td>					
+					</tr>
+				</tbody>
+				<tbody ng-switch-when="chemScheme">
+					<tr>
+						<td>
+							<chem-scheme chem-arrow="rarr">
+								<chem-subst chem-formula="H2SO4"></chem-subst>
+								<chem-subst chem-formula="NaOH"></chem-subst>
+								<chem-prod chem-formula="Na2SO4"></chem-prod>
+								<chem-prod chem-formula="H2O"></chem-prod>
+							</chem-scheme>
+						</td>
+						<td>
+							<pre></pre>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
